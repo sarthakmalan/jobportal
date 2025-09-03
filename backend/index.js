@@ -59,8 +59,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// CORS configuration
+const allowedOrigins = [
+  "http://localhost:5173", // your local frontend during dev
+  "https://jobportal-wheat-xi.vercel.app/" // replace with your deployed frontend URL
+];
+
 const corsOptions = {
-  origin: "http://localhost:5173", // Update this in production
+  origin: function (origin, callback) {
+    // allow requests with no origin like mobile apps or curl requests
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = `The CORS policy for this site does not allow access from the specified Origin: ${origin}`;
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   credentials: true,
 };
 
