@@ -61,8 +61,8 @@ app.use(cookieParser());
 
 // CORS configuration
 const allowedOrigins = [
-  "http://localhost:5173", // your local frontend during dev
-  "https://jobportal-wheat-xi.vercel.app/" // replace with your deployed frontend URL
+  "http://localhost:5173",
+  "https://jobportal-1u5febk30-sarthak-malans-projects.vercel.app" 
 ];
 
 const corsOptions = {
